@@ -59,7 +59,7 @@ public class Resume implements Cloneable  {
     }
     @Override
     public String toString(){
-        return "Имя:"+name+" Возраст:" + age + " Опыт работы:" + experinceOfWork;
+        return"id:" +id + " Имя:"+name+" Возраст:" + age + " Опыт работы:" + experinceOfWork;
     }
     @Override
     public Object clone() throws CloneNotSupportedException {
