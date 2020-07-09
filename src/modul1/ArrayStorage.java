@@ -1,7 +1,7 @@
 package modul1;
 
 public class ArrayStorage {
-    Resume[] arr = new Resume[10000];
+    Resume[] storage = new Resume[10000];
     int size;   //Количестов резюме в массиве
 
     public int getSize() {
@@ -9,8 +9,8 @@ public class ArrayStorage {
     }
 
     public void save(Resume r) {
-        if (size < arr.length) {
-            arr[size] = r;
+        if (size < storage.length) {
+            storage[size] = r;
             size++;
         } else {
             System.out.println("Массив заполнен полностью");
@@ -19,34 +19,16 @@ public class ArrayStorage {
 
     }       // Добавление элемента в массив
 
-    public boolean find(Resume r) {
-        if (size > 0) {
-            for (int i = 0; i < size; i++) {
-                if (r.equals(arr[i])) {
-                    return true;
-                }
-
-            }
-        }
-        return false;
-    }    // Поиск элемента в массиве
-
     public ArrayStorage clear() {
 
         return null;
     }              // Удалеие массива из памяти
 
-    public void showAll() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(arr[i].toString());
-        }
-    }             // Вывод массива
-
     public Resume[] getAll() {
         Resume[] allResume = new Resume[size];
         for (int i = 0; i < size; i++) {
             try {
-                allResume[i] = (Resume) arr[i].clone();
+                allResume[i] = (Resume) storage[i].clone();
             } catch (CloneNotSupportedException e) {
             }
         }
@@ -54,27 +36,34 @@ public class ArrayStorage {
         return allResume;
     }
 
-    public Resume get(int id) {
+    public Resume get(int uuid) {
         for (int i = 0; i < size; i++) {
-            if (arr[i].getId() == id) {
-                return arr[i];
+            if (storage[i].getUuid() == uuid) {
+                return storage[i];
             }
         }
         return null;
     }        // Возвращает резюме по id
 
-    public void delete(int id) {
+    public void delete(int uuid) {
         for (int i = 0; i < size; i++) { // Ищем элемент с нужным id
-            if (arr[i].getId() == id) {
+            if (storage[i].getUuid() == uuid) {
                 for (int j = i; j < size; j++) { // Сдвигаем массив влево на 1 элемент ,
-                    arr[j] = arr[j + 1];
+                    storage[j] = storage[j + 1];
                 }
                 size--;
-                System.out.println("Элемента с id " + id + " удалён");
+                System.out.println("Элемента с id " + uuid + " удалён");
                 return;
             }
         }
-        System.out.println("Элемента с id " + id + "- нет в массиве");
+        System.out.println("Элемента с id " + uuid + "- нет в массиве");
+    }
+
+    public Resume getArrayStorageElement(int index) {
+        if (index <= size) {
+            return storage[index];
+        }
+        return null;
     }
 
 }     // Удаление элемента из массива

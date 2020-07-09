@@ -40,6 +40,12 @@ public class MainArray {
         return num;
     }
 
+    static public void ShowStorage(ArrayStorage storage) {
+        for (int i = 0; i < storage.size; i++) {
+            System.out.println(storage.getArrayStorageElement(i).toString());
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         ArrayStorage ResumeArr = null;
         int choice = 0; // Переменная для выбора меню
@@ -49,16 +55,17 @@ public class MainArray {
             switch (choice) {
                 case (1): // Создание
                     ResumeArr = new ArrayStorage();
-                    MainTestArrayStorage.FillArr(5, ResumeArr);
-                    ResumeArr.showAll();
+                    MainTestArrayStorage.CreateStorage(5, ResumeArr);
+                    ShowStorage(ResumeArr);
+
                     break;
 
                 case (2): // Добавление
                     if (ResumeArr != null) {
 
-                        Resume r = MainTestArrayStorage.CreateNewResume();
+                        Resume r = new Resume();
                         ResumeArr.save(r);
-                        ResumeArr.showAll();
+                        ShowStorage(ResumeArr);
                     } else {
                         System.out.println("Массив не создан");
                     }
@@ -85,7 +92,7 @@ public class MainArray {
                     break;
                 case (5): // Вывод всех элементов
                     if (ResumeArr != null) {
-                        ResumeArr.showAll();
+                        ShowStorage(ResumeArr);
                     } else {
                         System.out.println("Массив не создан");
                     }
