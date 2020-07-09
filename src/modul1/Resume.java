@@ -1,17 +1,19 @@
 package modul1;
 
+import java.util.UUID;
+
 public class Resume implements Cloneable {
 
-    int uuid;
-    static int objID;
+    long uuid;
 
-    public int getUuid() {
+
+    public long getUuid() {
         return uuid;
     }
 
     public Resume() {
-        uuid = objID + 1;
-        objID++;
+        UUID uuidToGet = UUID.randomUUID();
+        uuid = uuidToGet.getLeastSignificantBits();
     }
 
     @Override
@@ -19,8 +21,5 @@ public class Resume implements Cloneable {
         return "id:" + uuid;
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
+
 }

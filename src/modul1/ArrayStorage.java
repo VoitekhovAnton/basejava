@@ -19,20 +19,20 @@ public class ArrayStorage {
 
     }       // Добавление элемента в массив
 
-    public ArrayStorage clear() {
+    public void clear() {
 
-        return null;
+        for (int i = 0; i < size; i++) {
+            storage[i] = null;
+            size--;
+        }
+
     }              // Удалеие массива из памяти
 
     public Resume[] getAll() {
         Resume[] allResume = new Resume[size];
         for (int i = 0; i < size; i++) {
-            try {
-                allResume[i] = (Resume) storage[i].clone();
-            } catch (CloneNotSupportedException e) {
-            }
+            allResume[i] = (Resume) storage[i];
         }
-
         return allResume;
     }
 
@@ -59,12 +59,7 @@ public class ArrayStorage {
         System.out.println("Элемента с id " + uuid + "- нет в массиве");
     }
 
-    public Resume getArrayStorageElement(int index) {
-        if (index <= size) {
-            return storage[index];
-        }
-        return null;
-    }
+
 
 }     // Удаление элемента из массива
 
