@@ -42,13 +42,14 @@ public class MainArray {
 
     static public void ShowStorage(ArrayStorage storage) {
         for (int i = 0; i < storage.size; i++) {
-            System.out.println(storage.get(i).toString());
+            System.out.println(storage.getStorageElement(i).toString());
         }
     }
 
     public static void main(String[] args) throws IOException {
         ArrayStorage ResumeArr = null;
         int choice = 0; // Переменная для выбора меню
+        Scanner in = new Scanner(System.in); // для ввода данных с клавиатуры
         do {
             System.out.println("1. Создать массив резюме с произвольной длинной\n2. Добавить элемент\n3. Удалить элемент\n4. Удалить массив\n5. Вывести массив\n6. Получение элемента из массива\n7. Выход");
             choice = NaturalNumberRange(1, 7);
@@ -61,8 +62,7 @@ public class MainArray {
                     break;
 
                 case (2): // Добавление
-                    if (ResumeArr.size == 0 || ResumeArr == null) {
-
+                    if (ResumeArr.size != 0 && ResumeArr != null) {
                         Resume r = new Resume();
                         ResumeArr.save(r);
                         ShowStorage(ResumeArr);
@@ -72,9 +72,9 @@ public class MainArray {
                     break;
 
                 case (3):// Удаление элемента
-                    if (ResumeArr.size == 0 || ResumeArr == null) {
+                    if (ResumeArr.size != 0 && ResumeArr != null) {
                         System.out.println("Введите id элемента");
-                        ResumeArr.delete(NaturalNum());
+                        ResumeArr.delete(in.nextLine());
                     } else {
                         System.out.println("Массив удалён");
                     }
@@ -82,7 +82,7 @@ public class MainArray {
                     break;
 
                 case (4): // Удаление массива из памяти
-                    if (ResumeArr.size == 0 || ResumeArr == null) {
+                    if (ResumeArr.size != 0 && ResumeArr != null) {
                         System.out.println("Массив не создан");
                     } else {
                         ResumeArr.clear();
@@ -91,7 +91,7 @@ public class MainArray {
 
                     break;
                 case (5): // Вывод всех элементов
-                    if (ResumeArr.size == 0 || ResumeArr == null) {
+                    if (ResumeArr.size != 0 && ResumeArr != null) {
                         ShowStorage(ResumeArr);
                     } else {
                         System.out.println("Массив не создан");
@@ -106,16 +106,15 @@ public class MainArray {
                         choice = NaturalNumberRange(1, 3);
                         switch (choice) {
                             case (1): {
-                                if (ResumeArr.size == 0 || ResumeArr == null) {
+                                if (ResumeArr.size != 0 && ResumeArr != null) {
                                     System.out.println("Введите id элемента");
-                                    int id = NaturalNum();
+                                    String id = in.nextLine();
                                     System.out.println(ResumeArr.get(id).toString());
-
                                 }
                             }
                             break;
                             case (2): {
-                                if (ResumeArr.size == 0 || ResumeArr == null) {
+                                if (ResumeArr.size != 0 && ResumeArr != null) {
                                     Resume[] sw = ResumeArr.getAll();
                                     System.out.println("Все резюме клонированы в новый массив");
                                 } else {
@@ -125,7 +124,6 @@ public class MainArray {
                             break;
                         }
                     } while (choice != 3);
-
                 }
                 break;
             }

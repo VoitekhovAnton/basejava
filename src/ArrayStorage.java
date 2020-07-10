@@ -8,6 +8,7 @@ public class ArrayStorage {
         return size;
     }
 
+    // Добавление элемента в массив
     public void save(Resume r) {
         if (size < storage.length) {
             storage[size] = r;
@@ -17,38 +18,40 @@ public class ArrayStorage {
         }
 
 
-    }       // Добавление элемента в массив
+    }
 
+    // Удаление массива из памяти
     public void clear() {
-
         for (int i = 0; i < size; i++) {
             storage[i] = null;
-            size--;
         }
+        size = 0;
+    }
 
-    }              // Удалеие массива из памяти
-
+    // Запись всех резюме в отдельный массив
     public Resume[] getAll() {
         Resume[] allResume = new Resume[size];
         for (int i = 0; i < size; i++) {
-            allResume[i] = (Resume) storage[i];
+            allResume[i] = storage[i];
         }
         return allResume;
     }
 
-    public Resume get(int uuid) {
+    // Возвращает резюме по id
+    public Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid() == uuid) {
+            if (storage[i].getUuid().equals(uuid)) {
                 return storage[i];
             }
         }
         return null;
-    }        // Возвращает резюме по id
+    }
 
-    public void delete(int uuid) {
+    // Удаление элемента из массива
+    public void delete(String uuid) {
         for (int i = 0; i < size; i++) { // Ищем элемент с нужным id
-            if (storage[i].getUuid() == uuid) {
-                for (int j = i; j < size; j++) { // Сдвигаем массив влево на 1 элемент ,
+            if (storage[i].getUuid().equals(uuid)) {
+                for (int j = i; j < size - 1; j++) { // Сдвигаем массив влево на 1 элемент ,
                     storage[j] = storage[j + 1];
                 }
                 size--;
@@ -59,7 +62,12 @@ public class ArrayStorage {
         System.out.println("Элемента с id " + uuid + "- нет в массиве");
     }
 
-
-
-}     // Удаление элемента из массива
+    // Индексатор для вывода storage 
+    public Resume getStorageElement(int index) {
+        if (storage[index] != null) {
+            return storage[index];
+        }
+        return null;
+    }
+}
 
